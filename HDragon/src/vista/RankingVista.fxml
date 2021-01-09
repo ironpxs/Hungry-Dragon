@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1022.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.RankingVistaControlador">
+   <children>
+      <Label layoutX="458.0" layoutY="35.0" prefHeight="34.0" prefWidth="112.0" text="RANKING">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <TableView layoutX="22.0" layoutY="76.0" prefHeight="344.0" prefWidth="971.0">
+         <columns>
+            <TableColumn prefWidth="445.33331298828125" text="Nombre" />
+            <TableColumn prefWidth="253.0" text="Puntos" />
+            <TableColumn prefWidth="277.0" text="Duración" />
+         </columns>
+      </TableView>
+      <ImageView fitHeight="272.0" fitWidth="969.0" layoutX="22.0" layoutY="430.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Img/fondoLlamas.jpg" />
+         </image>
+         <effect>
+            <ColorAdjust />
+         </effect>
+      </ImageView>
+      <Label fx:id="lblGanador1" contentDisplay="CENTER" layoutX="409.0" layoutY="517.0" prefHeight="40.0" prefWidth="210.0" text="Maximiliano" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Eras Bold ITC" size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblGanador2" contentDisplay="CENTER" layoutX="584.0" layoutY="590.0" prefHeight="59.0" prefWidth="168.0" text="Maximiliano2" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Eras Bold ITC" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblGanador3" contentDisplay="CENTER" layoutX="293.0" layoutY="557.0" prefHeight="59.0" prefWidth="148.0" text="Maximiliano2" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Eras Bold ITC" size="21.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
