@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1022.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioControlador">
+   <children>
+      <ImageView fitHeight="719.0" fitWidth="1022.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Img/Fondo2.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnJugar" layoutX="226.0" layoutY="472.0" mnemonicParsing="false" onAction="#jugar" prefHeight="75.0" prefWidth="159.0" text="JUGAR" textAlignment="CENTER">
+         <font>
+            <Font name="Franklin Gothic Heavy" size="33.0" />
+         </font>
+         <textFill>
+            <RadialGradient centerX="0.5166666666666667" centerY="0.5047619047619047" focusDistance="-0.023255813953488413" radius="0.627906976744186">
+               <stops>
+                  <Stop color="#9e9e9e" />
+                  <Stop color="#9e9e9e" offset="0.007662835249042145" />
+                  <Stop color="#141414" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </textFill>
+      </Button>
+   </children>
+</AnchorPane>
