@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1022.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.JuegoControlador">
    <children>
-      <Button fx:id="btnOp1" layoutX="43.0" layoutY="497.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="206.0" text="Button" />
+      <Button fx:id="btnOp1" layoutX="43.0" layoutY="497.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="206.0" />
       <ImageView fx:id="imgDragon" fitHeight="266.0" fitWidth="294.0" layoutX="589.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../dragonImg/espera.jpg" />
@@ -52,8 +52,8 @@
          <font>
             <Font size="34.0" />
          </font></Label>
-      <Button fx:id="btnOp2" layoutX="288.0" layoutY="496.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="206.0" text="Button" />
-      <Button fx:id="btnOp3" layoutX="526.0" layoutY="496.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="206.0" text="Button" />
-      <Button fx:id="btnOp4" layoutX="763.0" layoutY="495.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="206.0" text="Button" />
+      <Button fx:id="btnOp2" layoutX="288.0" layoutY="496.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="206.0" />
+      <Button fx:id="btnOp3" layoutX="526.0" layoutY="496.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="206.0" />
+      <Button fx:id="btnOp4" layoutX="763.0" layoutY="495.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="206.0" />
    </children>
 </AnchorPane>
