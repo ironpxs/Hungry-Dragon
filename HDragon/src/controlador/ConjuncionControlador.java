@@ -5,18 +5,20 @@
  */
 package controlador;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-import javafx.application.Platform;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import modelo.RutasImagenesNiveles;
+import modelo.ThreadConjuncion;
 
 
 
@@ -25,10 +27,10 @@ import modelo.RutasImagenesNiveles;
  *
  * @author Administrador
  */
-public class JuegoControlador implements Initializable {
+public class ConjuncionControlador implements Initializable {
 
     @FXML
-    private Button btnOp1;
+    private ToggleButton btnOp1;
     @FXML
     private ImageView imgDragon;
     @FXML
@@ -41,22 +43,28 @@ public class JuegoControlador implements Initializable {
     private Label lblTiempo;
     @FXML
     private Label lblIntento;
+
     @FXML
-    private Button btnOp2;
+    private ToggleButton btnOp3;
     @FXML
-    private Button btnOp3;
+    private ToggleButton btnOp4;
+    
     @FXML
-    private Button btnOp4;
+    private Label lblEnunciado;
+    
+    @FXML
+    private Label lblPuntos;
+    @FXML
+    private ToggleGroup opciones=null;
     
     private int intento;
-    
-    //Atributos de cuenta regresiva
-    private Timer t;
-    private TimerTask task;
     private int seg;
+    private ToggleButton btnOpCorrect;
+    @FXML
+    private ToggleButton btnConjuncion;
    
-    public JuegoControlador() {
-        this.seg = 10;
+    public ConjuncionControlador() {
+        this.seg = 60;
         this.intento = 2;
     }
 
@@ -67,39 +75,19 @@ public class JuegoControlador implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         lblTiempo.setText(String.valueOf(seg));
         lblIntento.setText(String.valueOf(intento));
-        t = new Timer();
-        task = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(()->{
-                        seg--;
-                        System.out.println(seg);
-                        lblTiempo.setText(String.valueOf(seg));
-                        if(seg==0){
-                            t.cancel();
-                        }
-                    
-                });
-            }
-        };
-        t.schedule(task, 1000,1000);
-        RutasImagenesNiveles nivelConjuncion = new RutasImagenesNiveles();
-        //Enunciado
-        nivelConjuncion.setOperador("/conjuncion/conjuncion.png");
-        nivelConjuncion.setComidaIzquierda("/conjuncion/bebida.png");
-        nivelConjuncion.setComidaDerecha("/conjuncion/canguil.png");
-        //Dragon
-        nivelConjuncion.setDragon("/dragonImg/espera.png");
-        //Opciones
-        nivelConjuncion.setOpcion1("/conjuncion/bebida.png");
-        nivelConjuncion.setOpcion2("/conjuncion/sodayCanguil.png");
-        nivelConjuncion.setOpcion3("/conjuncion/canguil.png");
-        nivelConjuncion.setOpcion4("/conjuncion/hamburguesa.png");
-        colocarImagenes(nivelConjuncion);
         
-    }
+        //Conjuncion
+        btnOpCorrect = btnConjuncion;
+        ThreadConjuncion nivelConjuncion = new ThreadConjuncion(imgDragon,seg,intento,lblTiempo,lblPuntos,lblIntento,btnOpCorrect,opciones);
+        Runnable r1 = nivelConjuncion;
+        Thread hiloConjuncion = new Thread(r1);
+        colocarImagenes(nivelConjuncion.getRutas());
+        hiloConjuncion.start();
+        
        
-   private void colocarImagenes(RutasImagenesNiveles rutas){
+   }
+   
+    private void colocarImagenes(RutasImagenesNiveles rutas){
        //Enunciado
        URL linkOperador=getClass().getResource(rutas.getOperador());
        URL linkComidaIzquierda=getClass().getResource(rutas.getComidaIzquierda());
@@ -115,8 +103,7 @@ public class JuegoControlador implements Initializable {
        //Dragon
        URL linkDragon=getClass().getResource(rutas.getDragon());
        
-       Image imagenDragon = new Image(linkDragon.toString(),394,366,false,true);
-       
+       Image imagenDragon = new Image(linkDragon.toString(),311,371,true,true);
        imgDragon.setImage(imagenDragon);
        //Opciones
        URL linkOp1=getClass().getResource(rutas.getOpcion1());
@@ -124,16 +111,15 @@ public class JuegoControlador implements Initializable {
        URL linkOp3=getClass().getResource(rutas.getOpcion3());
        URL linkOp4=getClass().getResource(rutas.getOpcion4());
        
-       Image imagenOp1 = new Image(linkOp1.toString(),129,114,false,true);
-       Image imagenOp2 = new Image(linkOp2.toString(),129,114,false,true);
-       Image imagenOp3 = new Image(linkOp3.toString(),129,114,false,true);
-       Image imagenOp4 = new Image(linkOp4.toString(),129,114,false,true);
+       Image imagenOp1 = new Image(linkOp1.toString(),200,149,true,true);
+       Image imagenOp2 = new Image(linkOp2.toString(),200,149,true,true);
+       Image imagenOp3 = new Image(linkOp3.toString(),200,149,true,true);
+       Image imagenOp4 = new Image(linkOp4.toString(),200,149,true,true);
        
        btnOp1.setGraphic((new ImageView(imagenOp1)));
-       btnOp2.setGraphic((new ImageView(imagenOp2)));
+       btnConjuncion.setGraphic((new ImageView(imagenOp2)));
        btnOp3.setGraphic((new ImageView(imagenOp3)));
        btnOp4.setGraphic((new ImageView(imagenOp4)));
         
    }
-    
 }

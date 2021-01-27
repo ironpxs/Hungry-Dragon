@@ -11,16 +11,16 @@ package modelo;
  */
 public class RutasImagenesNiveles {
     //Enunciado
-    String operador;
-    String comidaIzquierda;
-    String comidaDerecha;
+    protected String operador;
+    protected String comidaIzquierda;
+    protected String comidaDerecha;
     //Dragon
-    String dragon;
+    protected String dragon;
     //Opciones
-    String opcion1;
-    String opcion2;
-    String opcion3;
-    String opcion4;
+    protected String opcion1;
+    protected String opcion2;
+    protected String opcion3;
+    protected String opcion4;
 
     public String getOperador() {
         return operador;
