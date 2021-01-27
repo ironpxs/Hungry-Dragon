@@ -55,7 +55,7 @@ public class RankingControlador implements Initializable {
     private TableColumn colPuntos;
     @FXML
     private TableColumn colDuracion;
-    private String filename = "C:/Users/Administrador/Desktop/Prueba/archivo.dat";
+    private String filename = "src\\modelo\\archivo.dat";
     AudioClip aplauso = aplauso();
     AudioClip epicwin = epicwin();
     Jugador j = Jugador.getInstancia();
@@ -80,8 +80,10 @@ public class RankingControlador implements Initializable {
         }else{
             aplauso.loop();
         }
-        lblGanador2.setText(jugadores.get(1).getNombre());
-        lblGanador3.setText(jugadores.get(2).getNombre());
+        if(jugadores.size()>1){
+            lblGanador2.setText(jugadores.get(1).getNombre());
+            lblGanador3.setText(jugadores.get(2).getNombre());
+        }
     }
 
     
@@ -126,13 +128,13 @@ public class RankingControlador implements Initializable {
     
     public AudioClip aplauso(){
         AudioClip Sound;
-        Sound = java.applet.Applet.newAudioClip(getClass().getResource("/sonido/aplauso.mp3")); 
+        Sound = java.applet.Applet.newAudioClip(getClass().getResource("/sonido/Aplauso.wav")); 
         return Sound;
     }
 
     private AudioClip epicwin() {
         AudioClip Sound;
-        Sound = java.applet.Applet.newAudioClip(getClass().getResource("/sonido/epicwin.mp3")); 
+        Sound = java.applet.Applet.newAudioClip(getClass().getResource("/sonido/Epicwin.wav")); 
         return Sound;
     }
     

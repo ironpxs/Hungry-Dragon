@@ -79,6 +79,7 @@ public class DisyuncionControlador implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         lblTiempo.setText(String.valueOf(seg));
         lblIntento.setText(String.valueOf(intento));
         lblPuntos.setText(String.valueOf(Jugador.getInstancia().getPuntos()));    

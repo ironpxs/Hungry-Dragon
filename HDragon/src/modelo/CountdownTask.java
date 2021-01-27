@@ -28,6 +28,11 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.applet.AudioClip;
 import static java.lang.Thread.sleep;
+import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import javafx.scene.control.Toggle;
 
 /**
  *
@@ -35,7 +40,7 @@ import static java.lang.Thread.sleep;
  */
 public class CountdownTask extends TimerTask{
     private ImageView imgDragon;
-    private int seg, intento;
+    private int seg, intento,obs;
     private Label lblTiempo,lblPuntos,lblIntento;
     private ToggleButton btnOpCorrect;
     private ToggleGroup opciones;
@@ -54,7 +59,7 @@ public class CountdownTask extends TimerTask{
         this.lblIntento = lblIntento;
         this.btnOpCorrect = btnOpCorrect;
         this.opciones = opciones;
-    
+        this.obs=0;
     }
     
    
@@ -65,62 +70,67 @@ public class CountdownTask extends TimerTask{
                     seg--;
                     lblTiempo.setText(String.valueOf(seg));
                     try{
-                        if(intento>0 && seg>0){
-                            j.setDuracion(j.getDuracion()+1);
-                            //winner.stop();
-                            if(seg>30 && opciones.getSelectedToggle().equals(btnOpCorrect)){
-                                
-                                imgDragon.setImage(new Image("/dragonImg/feliz.png"));
-                                //winner.loop();
-                                if(intento>=2){
-                                    j.setPuntos(j.getPuntos()+20);
-                                }else{
-                                    j.setPuntos(j.getPuntos()+10);
-                                }
-                                lblPuntos.setText(String.valueOf(j.getPuntos()));
-                                
-                                if(btnOpCorrect.getId().compareToIgnoreCase("btnImplicacion")!=0){
-                                    //winner.loop();
-                                    
-                                    
-                                    siguienteNivel();
-                                    
-                                    
+                        if(seg>0){
+                                j.setDuracion(j.getDuracion()+1);
+                                if(obs==0){
+                                    if(opciones.getSelectedToggle().equals(btnOpCorrect)){
+                                            momentoCorrecto();
+                                            obs=seg;
+                                            seg+=3;
+
+                                            if(seg>30){
+                                            //CORRECTO DEBE DEMORAR UN POCO.             
+
+
+                                                if(intento>=2){
+                                                    j.setPuntos(j.getPuntos()+20);
+                                                }else{
+                                                    j.setPuntos(j.getPuntos()+10);
+                                                }
+
+                                            }else if(seg<=30){
+                                                //CORRECTO DEBE DEMORAR UN POCO.
+
+
+                                                if(intento>=2){
+                                                    j.setPuntos(j.getPuntos()+15);
+                                                }else{
+                                                    j.setPuntos(j.getPuntos()+5);
+                                                }
+                                            }
+                                            lblPuntos.setText(String.valueOf(j.getPuntos()));   
+
+
+                                            
+
                                 }
                                 else{
-                                    System.out.println("Ganó el juego");
-                                    
-                                    nombreRanking();
-                                }  
-                                cancel();
-                            }else if(seg<=30 && opciones.getSelectedToggle().equals(btnOpCorrect)){
-                                //winner.loop();
-                                if(intento>=2){
-                                    j.setPuntos(j.getPuntos()+15);
-                                }else{
-                                    j.setPuntos(j.getPuntos()+5);
+
+                                    imgDragon.setImage(new Image("/dragonImg/enojado.png"));
+                                    intento--;
+                                    lblIntento.setText(String.valueOf(intento));   
+                                    if(intento == 0){
+                                        System.out.println("Perdió");
+                                        nombreRanking();
+                                        cancel(); 
+                                    }
+                                   
                                 }
-                                lblPuntos.setText(String.valueOf(j.getPuntos()));
-                                if(btnOpCorrect.getId().compareToIgnoreCase("btnImplicacion")!=0){
-                                    imgDragon.setImage(new Image("/dragonImg/feliz.png"));
-                                    
-                                    siguienteNivel();
-                                }else{
-                                    System.out.println("Ganó el juego");
-                                    
-                                    nombreRanking();
-                                }
-                                cancel();
+                                opciones.getSelectedToggle().setSelected(false);
                             }else{
-                                imgDragon.setImage(new Image("/dragonImg/enojado.png"));
-                                intento--;
-                                lblIntento.setText(String.valueOf(intento));   
+                                    if(seg==obs){
+                                            if(btnOpCorrect.getId().compareToIgnoreCase("btnImplicacion")!=0){
+                                                siguienteNivel();
+                                                cancel();
+                                            }else{
+                                                System.out.println("Ganó el juego");
+                                                nombreRanking();
+                                                cancel();
+                                            }
+                                            
+                                    }
                             }
-                            opciones.getSelectedToggle().setSelected(false);
-                        }else{
-                            System.out.println("Perdió");
-                            nombreRanking();
-                            cancel();    
+                               
                         }
                     }catch(NullPointerException e){
                         
@@ -189,6 +199,12 @@ public class CountdownTask extends TimerTask{
         return Sound;
     }
     
+
+    private void momentoCorrecto(){
+        imgDragon.setImage(new Image("/dragonImg/feliz.png"));    
+        winner.play();
+     
+    } 
 }
 
 
