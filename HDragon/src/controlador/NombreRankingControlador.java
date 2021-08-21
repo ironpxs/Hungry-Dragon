@@ -18,7 +18,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modelo.Jugador;
 
 /**
@@ -32,6 +35,8 @@ public class NombreRankingControlador implements Initializable {
     private TextField txtNombre;
     @FXML
     private Button btnEnviarNombre;
+    @FXML
+    private ImageView imgViewCerrar;
 
     /**
      * Initializes the controller class.
@@ -54,6 +59,7 @@ public class NombreRankingControlador implements Initializable {
            
             Scene scene = new Scene(root,1012, 709);
             Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
             stage.show();
             
@@ -63,6 +69,12 @@ public class NombreRankingControlador implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(InicioControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void cerrar(MouseEvent event) {
+        Stage myStage = (Stage) this.imgViewCerrar.getScene().getWindow();
+        myStage.close();
     }
     
 }

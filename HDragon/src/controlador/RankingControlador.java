@@ -32,6 +32,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import modelo.Jugador;
 
 /**
@@ -61,6 +64,8 @@ public class RankingControlador implements Initializable {
     Jugador j = Jugador.getInstancia();
     
     private ObservableList<Jugador> jugadores;
+    @FXML
+    private ImageView imgViewCerrar;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -136,6 +141,12 @@ public class RankingControlador implements Initializable {
         AudioClip Sound;
         Sound = java.applet.Applet.newAudioClip(getClass().getResource("/sonido/Epicwin.wav")); 
         return Sound;
+    }
+
+    @FXML
+    private void cerrar(MouseEvent event) {
+        Stage myStage = (Stage) this.imgViewCerrar.getScene().getWindow();
+        myStage.close();
     }
     
     

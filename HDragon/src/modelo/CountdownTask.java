@@ -6,12 +6,13 @@
 package modelo;
 
 
+import controlador.BicondicionalControlador;
 import controlador.DisyuncionControlador;
 import controlador.ImplicacionControlador;
 import controlador.InicioControlador;
-import controlador.Main;
 import controlador.NegacionControlador;
 import controlador.NombreRankingControlador;
+import controlador.TutorialControlador;
 import java.io.IOException;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -23,24 +24,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 import javafx.stage.Stage;
 import java.applet.AudioClip;
-import static java.lang.Thread.sleep;
-import java.util.ArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import javafx.scene.control.Toggle;
+import javafx.stage.StageStyle;
+
 
 /**
  *
  * @author Administrador
  */
 public class CountdownTask extends TimerTask{
-    private ImageView imgDragon;
-    private int seg, intento,obs;
+    private int seg, segAux,intento,obs;
     private Label lblTiempo,lblPuntos,lblIntento;
     private ToggleButton btnOpCorrect;
     private ToggleGroup opciones;
@@ -48,18 +43,18 @@ public class CountdownTask extends TimerTask{
     
     Jugador j = Jugador.getInstancia();
 
-    public CountdownTask(ImageView imgDragon,int seg, int intento, Label lblTiempo, Label lblPuntos, 
+    public CountdownTask(int seg, int intento, Label lblTiempo, Label lblPuntos, 
             Label lblIntento, ToggleButton btnOpCorrect, ToggleGroup opciones) {
         
-        this.imgDragon=imgDragon;
+
         this.seg = seg;
+        this.segAux = seg;
         this.intento = intento;
         this.lblTiempo = lblTiempo;
         this.lblPuntos = lblPuntos;
         this.lblIntento = lblIntento;
         this.btnOpCorrect = btnOpCorrect;
         this.opciones = opciones;
-        this.obs=0;
     }
     
    
@@ -68,13 +63,14 @@ public class CountdownTask extends TimerTask{
     public void run() {
         Platform.runLater(()->{
                     seg--;
+                    System.out.println(seg);
                     lblTiempo.setText(String.valueOf(seg));
                     try{
                         if(seg>0){
                                 j.setDuracion(j.getDuracion()+1);
                                 if(obs==0){
                                     if(opciones.getSelectedToggle().equals(btnOpCorrect)){
-                                            momentoCorrecto();
+                                            winner.play();
                                             obs=seg;
                                             seg+=3;
 
@@ -99,29 +95,25 @@ public class CountdownTask extends TimerTask{
                                                 }
                                             }
                                             lblPuntos.setText(String.valueOf(j.getPuntos()));   
-
-
-                                            
-
-                                }
-                                else{
-
-                                    imgDragon.setImage(new Image("/dragonImg/enojado.png"));
-                                    intento--;
-                                    lblIntento.setText(String.valueOf(intento));   
-                                    if(intento == 0){
-                                        System.out.println("Perdió");
-                                        nombreRanking();
-                                        cancel(); 
                                     }
-                                   
-                                }
-                                opciones.getSelectedToggle().setSelected(false);
+                                    else{
+                                            intento--;
+                                            lblIntento.setText(String.valueOf(intento));   
+                                            if(intento == 0){
+                                                System.out.println("Perdió");
+                                                nombreRanking();
+                                                cancel(); 
+                                            }
+
+                                    }
+                                    opciones.getSelectedToggle().setSelected(false);
                             }else{
                                     if(seg==obs){
-                                            if(btnOpCorrect.getId().compareToIgnoreCase("btnImplicacion")!=0){
+                                            if(btnOpCorrect.getId().compareToIgnoreCase("btnBicondicional")!=0){
                                                 siguienteNivel();
                                                 cancel();
+                                                //ThreadsNiveles.t.cancel();
+                                                
                                             }else{
                                                 System.out.println("Ganó el juego");
                                                 nombreRanking();
@@ -131,42 +123,40 @@ public class CountdownTask extends TimerTask{
                                     }
                             }
                                
+                        }else{
+                            if(intento>0){
+                                if(intento > 1){
+                                    seg = segAux;
+                                }
+                                intento--;
+                                lblIntento.setText(String.valueOf(intento));
+                            }
+                            else if(intento == 0){
+                                System.out.println("Perdió");
+                                nombreRanking();
+                                cancel(); 
+                            }
                         }
                     }catch(NullPointerException e){
                         
 
-            }
+                    }
                     
-         });
+                    });
     }
 
     private void siguienteNivel(){
         try {
-            FXMLLoader loader=null;
-            String idButton = btnOpCorrect.getId();
-            if(idButton.compareToIgnoreCase("btnConjuncion")==0){
-                loader = new FXMLLoader(getClass().getResource("/vista/VistaDisyuncion.fxml"));
-            }else if(idButton.compareToIgnoreCase("btnDisyuncion")==0){
-                loader = new FXMLLoader(getClass().getResource("/vista/VistaNegacion.fxml"));
-            }else if(idButton.compareToIgnoreCase("btnNegacion")==0){
-                loader = new FXMLLoader(getClass().getResource("/vista/VistaImplicacion.fxml"));
-            }
-            
-            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/VistaTutorial.fxml"));
+                          
             Parent root = loader.load();
             
-            if(idButton.compareToIgnoreCase("btnConjuncion")==0){
-                DisyuncionControlador controlador = (DisyuncionControlador) loader.getController();
-            }else if(idButton.compareToIgnoreCase("btnDisyuncion")==0){
-                NegacionControlador controlador = (NegacionControlador) loader.getController();
-            }else if(idButton.compareToIgnoreCase("btnNegacion")==0){
-                ImplicacionControlador controlador = (ImplicacionControlador) loader.getController();
-            }
+            TutorialControlador controlador = (TutorialControlador) loader.getController();
             
-           
             Scene scene = new Scene(root,1012, 709);
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
             
             Stage myStage = (Stage) this.btnOpCorrect.getScene().getWindow();
@@ -184,11 +174,13 @@ public class CountdownTask extends TimerTask{
             NombreRankingControlador controlador = (NombreRankingControlador) loader.getController();
             Scene scene = new Scene(root,323,140);
             Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
             stage.show();
             
             Stage myStage = (Stage) this.btnOpCorrect.getScene().getWindow();
             myStage.close();
+            
         } catch (IOException ex) {
             Logger.getLogger(CountdownTask.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -200,11 +192,9 @@ public class CountdownTask extends TimerTask{
     }
     
 
-    private void momentoCorrecto(){
-        imgDragon.setImage(new Image("/dragonImg/feliz.png"));    
-        winner.play();
-     
-    } 
+
+          
+       
 }
 
 

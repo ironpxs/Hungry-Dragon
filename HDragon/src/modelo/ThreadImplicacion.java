@@ -25,7 +25,7 @@ public class ThreadImplicacion extends ThreadsNiveles {
         super.getRutas().setComidaIzquierda("/implicacion/Comida.png");    
         super.getRutas().setComidaDerecha("/implicacion/Bebida.png");
         //Dragon
-        super.getRutas().setDragon("/dragonImg/espera.png");
+        super.getRutas().setDragon("/dragonImg/enojado.png");
         //Opciones
         super.getRutas().setOpcion1("/implicacion/hamburguesayPollo.png");
         super.getRutas().setOpcion2("/implicacion/sodayHelado.png");

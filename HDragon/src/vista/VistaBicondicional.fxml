@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1022.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.BicondicionalControlador">
+   <children>
+      <ImageView fx:id="imgDragon" fitHeight="311.0" fitWidth="371.0" layoutX="578.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../dragonImg/espera.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="7.0" layoutY="6.0" prefHeight="31.0" prefWidth="132.0" text="Tiempo:">
+         <font>
+            <Font size="34.0" />
+         </font></Label>
+      <ImageView fx:id="imgComida1" fitHeight="114.0" fitWidth="129.0" layoutX="216.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Img/noImg.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgComida2" fitHeight="114.0" fitWidth="124.0" layoutX="412.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Img/noImg.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgOperador" fitHeight="38.0" fitWidth="47.0" layoutX="351.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../operadoresImg/conjuncion.png" />
+         </image>
+      </ImageView>
+      <Separator layoutX="-2.0" layoutY="420.0" prefHeight="17.0" prefWidth="1025.0" />
+      <Label fx:id="lblTiempo" layoutX="140.0" layoutY="9.0" prefHeight="50.0" prefWidth="92.0" text="00:00">
+         <font>
+            <Font size="34.0" />
+         </font></Label>
+      <Label layoutX="269.0" layoutY="7.0" prefHeight="50.0" prefWidth="130.0" text="Intento:">
+         <font>
+            <Font size="34.0" />
+         </font></Label>
+      <Label fx:id="lblIntento" layoutX="402.0" layoutY="7.0" prefHeight="17.0" prefWidth="18.0" text="0">
+         <font>
+            <Font size="34.0" />
+         </font></Label>
+      <Label layoutX="429.0" layoutY="7.0" prefHeight="50.0" prefWidth="39.0" text="/2">
+         <font>
+            <Font size="34.0" />
+         </font></Label>
+      <Label fx:id="lblEnunciado" layoutX="43.0" layoutY="393.0" prefHeight="36.0" prefWidth="547.0">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="763.0" layoutY="6.0" prefHeight="50.0" prefWidth="130.0" text="Puntos:">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPuntos" layoutX="890.0" layoutY="9.0" prefHeight="50.0" prefWidth="59.0" text="0" textAlignment="RIGHT">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Separator layoutX="-2.0" layoutY="50.0" prefHeight="17.0" prefWidth="1025.0" />
+      <ToggleButton fx:id="btnOp4" layoutX="781.0" layoutY="502.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="206.0">
+         <toggleGroup>
+            <ToggleGroup fx:id="opciones" />
+         </toggleGroup>
+      </ToggleButton>
+      <ToggleButton fx:id="btnBicondicional" layoutX="539.0" layoutY="501.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="206.0" toggleGroup="$opciones" />
+      <ToggleButton fx:id="btnOp1" layoutX="44.0" layoutY="502.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="206.0" toggleGroup="$opciones" />
+      <ToggleButton fx:id="btnOp2" layoutX="291.0" layoutY="502.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="206.0" toggleGroup="$opciones" />
+      <ImageView fx:id="imgViewCerrar" fitHeight="41.0" fitWidth="51.0" layoutX="963.0" layoutY="10.0" onDragDetected="#cerrar" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Img/botonCerrar.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

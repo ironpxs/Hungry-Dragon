@@ -16,9 +16,12 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import modelo.RutasImagenesNiveles;
 import modelo.ThreadConjuncion;
+
 
 
 
@@ -62,7 +65,9 @@ public class ConjuncionControlador implements Initializable {
     private ToggleButton btnOpCorrect;
     @FXML
     private ToggleButton btnConjuncion;
-   
+    @FXML
+    private ImageView imgViewCerrar;
+    private ThreadConjuncion nivelConjuncion;
     public ConjuncionControlador() {
         this.seg = 60;
         this.intento = 2;
@@ -75,10 +80,9 @@ public class ConjuncionControlador implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         lblTiempo.setText(String.valueOf(seg));
         lblIntento.setText(String.valueOf(intento));
-        
         //Conjuncion
         btnOpCorrect = btnConjuncion;
-        ThreadConjuncion nivelConjuncion = new ThreadConjuncion(imgDragon,seg,intento,lblTiempo,lblPuntos,lblIntento,btnOpCorrect,opciones);
+        nivelConjuncion = new ThreadConjuncion(imgDragon,seg,intento,lblTiempo,lblPuntos,lblIntento,btnOpCorrect,opciones);
         Runnable r1 = nivelConjuncion;
         Thread hiloConjuncion = new Thread(r1);
         colocarImagenes(nivelConjuncion.getRutas());
@@ -122,4 +126,14 @@ public class ConjuncionControlador implements Initializable {
        btnOp4.setGraphic((new ImageView(imagenOp4)));
         
    }
+
+    @FXML
+    private void cerrar(MouseEvent event) {
+        System.out.println(Thread.activeCount());
+        //ThreadsNiveles.t.cancel();
+        //ThreadsNiveles.t.purge();
+        
+        Stage myStage = (Stage) this.imgViewCerrar.getScene().getWindow();
+        myStage.close();
+    }
 }

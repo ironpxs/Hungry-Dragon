@@ -5,7 +5,7 @@
  */
 package modelo;
 
-import java.util.Timer;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -25,7 +25,7 @@ public class ThreadConjuncion extends ThreadsNiveles {
         super.getRutas().setComidaIzquierda("/conjuncion/bebida.png");
         super.getRutas().setComidaDerecha("/conjuncion/canguil.png");
         //Dragon
-        super.getRutas().setDragon("/dragonImg/espera.png");
+        super.getRutas().setDragon("/dragonImg/feliz.png");
         //Opciones
         super.getRutas().setOpcion1("/conjuncion/bebida.png");
         super.getRutas().setOpcion2("/conjuncion/sodayCanguil.png");

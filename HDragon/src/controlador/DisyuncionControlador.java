@@ -20,6 +20,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import modelo.CountdownTask;
 import modelo.Jugador;
 import modelo.RutasImagenesNiveles;
@@ -68,6 +70,8 @@ public class DisyuncionControlador implements Initializable {
     private ToggleButton btnOpCorrect;
     @FXML
     private ToggleButton btnDisyuncion;
+    @FXML
+    private ImageView imgViewCerrar;
    
     public DisyuncionControlador() {
         this.seg = 60;
@@ -127,4 +131,10 @@ public class DisyuncionControlador implements Initializable {
        btnOp4.setGraphic((new ImageView(imagenOp4)));
         
    }
+
+    @FXML
+    private void cerrar(MouseEvent event) {
+        Stage myStage = (Stage) this.imgViewCerrar.getScene().getWindow();
+        myStage.close();
+    }
 }

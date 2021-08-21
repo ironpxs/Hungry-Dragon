@@ -18,8 +18,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import controlador.ConjuncionControlador;
 import java.applet.AudioClip;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.StageStyle;
 /**
  * FXML Controller class
  *
@@ -30,12 +32,16 @@ public class InicioControlador implements Initializable {
     @FXML
     private Button btnJugar;
     private AudioClip intro = intro();
+    @FXML
+    private ImageView imgViewCerrar;
     /**
      * Initializes the controller class.
      */
+    
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {       
-
+        System.out.println(Thread.activeCount());
         intro.loop();
     }    
 
@@ -43,15 +49,15 @@ public class InicioControlador implements Initializable {
     private void jugar(ActionEvent event) {
         intro.stop();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/VistaConjuncion.fxml"));
-            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/VistaTutorial.fxml"));
             Parent root = loader.load();
 
-            ConjuncionControlador controlador = (ConjuncionControlador) loader.getController();
-           
+            TutorialControlador controlador = (TutorialControlador) loader.getController();
+            
             Scene scene = new Scene(root,1012, 709);
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
             
             Stage myStage = (Stage) this.btnJugar.getScene().getWindow();
@@ -67,5 +73,11 @@ public class InicioControlador implements Initializable {
         AudioClip Sound;
         Sound = java.applet.Applet.newAudioClip(getClass().getResource("/sonido/intro.wav")); 
         return Sound;
+    }
+
+    @FXML
+    private void cerrar(MouseEvent event) {
+        Stage myStage = (Stage) this.imgViewCerrar.getScene().getWindow();
+        myStage.close();
     }
 }

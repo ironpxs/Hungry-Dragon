@@ -5,14 +5,14 @@
  */
 package modelo;
 
-import java.net.URL;
+
 import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
+
 import javafx.scene.image.ImageView;
 
 /**
@@ -44,9 +44,9 @@ public abstract class ThreadsNiveles implements Runnable{
     
     @Override
     public void run() {
-        task = new CountdownTask(imgDragon,seg,intento,lblTiempo,lblPuntos,lblIntento,btnOpCorrect,opciones);
+        task = new CountdownTask(seg,intento,lblTiempo,lblPuntos,lblIntento,btnOpCorrect,opciones);
         t.schedule(task, 1000,1000);
-        t.purge();
+        
         try {
             Thread.currentThread().join();
         } catch (InterruptedException ex) {
@@ -120,5 +120,5 @@ public abstract class ThreadsNiveles implements Runnable{
     public void setRutas(RutasImagenesNiveles rutas) {
         this.rutas = rutas;
     }
-    
+
 }

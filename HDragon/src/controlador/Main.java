@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -24,6 +25,9 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
+    
+    public static String ruta;
+    
     @Override
     public void start(Stage primaryStage) {
         try{
@@ -34,8 +38,10 @@ public class Main extends Application {
             Scene scene = new Scene(root, 1012, 709);
             primaryStage.setTitle("Hungry Dragon");
             primaryStage.setScene(scene);
+            primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setResizable(false);
             primaryStage.show();
+           
         } catch (IOException e){
             System.out.println(e.getMessage());
         }

@@ -26,7 +26,7 @@ public class ThreadNegacion extends ThreadsNiveles{
         super.getRutas().setComidaIzquierda("/negacion/papas.png");
         super.getRutas().setComidaDerecha("/negacion/papas.png");
         //Dragon
-        super.getRutas().setDragon("/dragonImg/espera.png");
+        super.getRutas().setDragon("/dragonImg/feliz.png");
         //Opciones
         super.getRutas().setOpcion1("/negacion/sodayPapas.png");
         super.getRutas().setOpcion2("/negacion/canguilyPapas.png");

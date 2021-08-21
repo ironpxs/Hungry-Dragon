@@ -27,7 +27,7 @@ public class ThreadDisyuncion extends ThreadsNiveles{
         super.getRutas().setComidaIzquierda("/disyuncion/hamburguesa.png");
         super.getRutas().setComidaDerecha("/disyuncion/dona.png");
         //Dragon
-        super.getRutas().setDragon("/dragonImg/espera.png");
+        super.getRutas().setDragon("/dragonImg/enojado.png");
         //Opciones
         super.getRutas().setOpcion1("/disyuncion/helado.png");
         super.getRutas().setOpcion2("/disyuncion/hamburguesayDona.png");
